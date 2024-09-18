@@ -6,13 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-let dadosRecebidos = []; // Array para armazenar todos os dados recebidos
-// Endpoint para receber o Webhook e armazenar os dados
+let dadosRecebidos = [];
+// Endpoint recebe webhook
 app.post('/webhookMsgWhatsapp', (req, res) => {
     try {
-        // Desestruturando os dados recebidos do webhook
         const { contact_name, contact_phone, contact_email, deal_stage, deal_user, deal_status } = req.body;
-        // Armazenar os dados recebidos no array
         const dados = {
             nome: contact_name,
             telefone: contact_phone,
@@ -22,9 +20,9 @@ app.post('/webhookMsgWhatsapp', (req, res) => {
             status: deal_status
         };
         dadosRecebidos.push(dados);
-        // Exibindo no console apenas para depuração (opcional)
+        // Exibindo no cnls
         console.log('Dados recebidos do Clint:', dados);
-        // Resposta da API
+        // res API
         res.status(200).json({
             message: 'Dados recebidos com sucesso.',
             dadosRecebidos: dados
@@ -35,7 +33,7 @@ app.post('/webhookMsgWhatsapp', (req, res) => {
         res.status(500).json({ error: 'Erro ao processar o webhook.' });
     }
 });
-// Endpoint para visualizar todos os dados recebidos
+// Enpoint ver dados
 app.get('/webhookMsgWhatsappData', (req, res) => {
     try {
         res.status(200).json({
@@ -49,7 +47,7 @@ app.get('/webhookMsgWhatsappData', (req, res) => {
     }
 });
 // Iniciar o servidor
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3012;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
