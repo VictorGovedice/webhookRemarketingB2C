@@ -15,7 +15,7 @@ interface DadosRecebidos {
 let dadosRecebidos: DadosRecebidos[] = [];
 
 // Endpoint recebe webhook
-app.post('/webhookMsgWhatsapp', (req: Request, res: Response) => {
+app.post('/node-app/webhookMsgWhatsapp', (req: Request, res: Response) => {
     try {
 
         const { contact_name, contact_phone, contact_email, deal_stage, deal_user, deal_status } = req.body;
@@ -45,7 +45,7 @@ app.post('/webhookMsgWhatsapp', (req: Request, res: Response) => {
 });
 
 // Enpoint ver dados
-app.get('/webhookMsgWhatsappData', (req: Request, res: Response) => {
+app.get('/node-app/webhookMsgWhatsappData', (req: Request, res: Response) => {
     try {
         res.status(200).json({
             message: 'Todos os dados recebidos',
